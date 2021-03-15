@@ -9,11 +9,6 @@
 <script>
 export default {
   name: 'HeaderApp',
-  data () {
-    return {
-      nav: false,
-    }
-  }
 }
 </script>
 
