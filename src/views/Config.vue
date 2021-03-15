@@ -1,5 +1,6 @@
 <template>
   <form class="App-config">
+    <Profile/>
     <h1>Configurações</h1>
     <Darkmode />
     <br/>
@@ -9,10 +10,11 @@
 
 <script>
 import Darkmode from '@/components/Darkmode'
+import Profile from '@/components/Profile'
 
 export default {
   name: 'ConfigApp',
-  components: { Darkmode }
+  components: { Darkmode, Profile }
 }
 </script>
 
