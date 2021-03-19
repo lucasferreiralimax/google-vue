@@ -1,6 +1,6 @@
 <template>
-  <section class="App-keyboard" :class="{'active': keyboard}">
-    <h1>português brasileiro</h1>
+  <section class="App-keyboard" :class="{'active': keyboard}" v-draggable="draggableValue">
+    <h1 ref="handler">português brasileiro</h1>
     <button class="exit" type="button" @click="handleKeyboard(false)"><i class="icon icon-exit">X</i></button>
     <div class="App-keyboard-content">
       <div class="row">
@@ -74,16 +74,30 @@
 
 <script>
 import { mapState } from 'vuex'
+import { Draggable } from './draggable'
 
 export default {
   name: 'Keyboard',
   computed: mapState({
     keyboard: state => state.keyboard,
   }),
+  data () {
+    return {
+      draggableValue: {
+        handle: undefined,
+        boundingElement: undefined,
+      }
+    }
+  },
+  directives: { Draggable },
+  mounted () {
+    this.draggableValue.handle = this.$refs.handler
+    this.draggableValue.boundingElement = document.querySelector('.App')
+  },
   methods: {
     handleKeyboard (type) {
       this.$store.commit("updateKeyboard", type)
-    }
+    },
   }
 }
 </script>
@@ -95,9 +109,10 @@ export default {
   box-shadow: 0 4px 16px rgba(0,0,0,0.2);
   font-family: arial,sans-serif;
   font-size: 14px;
+  min-width: 495px;
   height: auto;
   left: 0;
-  margin: 10px;
+  margin: 0;
   opacity: 0;
   padding: 35px 10px 10px;
   pointer-events: none;
