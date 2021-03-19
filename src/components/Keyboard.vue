@@ -74,7 +74,7 @@
 
 <script>
 import { mapState } from 'vuex'
-import { Draggable } from './draggable'
+import { Draggable } from '@/directives/draggable'
 
 export default {
   name: 'Keyboard',
@@ -116,7 +116,7 @@ export default {
   opacity: 0;
   padding: 35px 10px 10px;
   pointer-events: none;
-  position: absolute;
+  position: fixed;
   top: 0;
   transition: .3s background-color opacity;
   user-select: none;

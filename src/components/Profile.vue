@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { clickOutside } from '@/directive/clickOutside.js'
+import { clickOutside } from '@/directives/clickOutside.js'
 
 export default {
   name: 'Profile',
