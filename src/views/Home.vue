@@ -1,10 +1,8 @@
 <template>
-  <div class="home">
-    <Profile/>
-    <HeaderApp/>
-    <SearchApp/>
-    <Keyboard/>
-  </div>
+  <Profile/>
+  <HeaderApp/>
+  <SearchApp/>
+  <Keyboard/>
 </template>
 
 <script>
