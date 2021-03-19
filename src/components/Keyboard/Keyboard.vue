@@ -34,7 +34,7 @@
         <button class="key" type="button">[</button>
       </div>
       <div class="row">
-        <button data-testid="capslock" class="key" type="button" style="width: 53.75px;"><i class="icon icon-capslock">capslock</i></button>
+        <button data-testid="capslock" class="key" :class="{'active': capslock}" type="button" style="width: 53.75px;"><i class="icon icon-capslock">capslock</i></button>
         <button class="key" type="button">a</button>
         <button class="key" type="button">s</button>
         <button class="key" type="button">d</button>
@@ -49,7 +49,7 @@
         <button class="key" type="button">]</button>
       </div>
       <div class="row">
-        <button data-testid="shift_1" class="key" type="button" style="width: 37.25px;"><i class="icon icon-shitf">shift 1</i></button>
+        <button data-testid="shift_1" class="key" :class="{'active': shift}" type="button" style="width: 37.25px;"><i class="icon icon-shitf">shift 1</i></button>
         <button class="key" type="button">\</button>
         <button class="key" type="button">z</button>
         <button class="key" type="button">x</button>
@@ -61,12 +61,12 @@
         <button class="key" type="button">,</button>
         <button class="key" type="button">.</button>
         <button class="key" type="button">;</button>
-        <button data-testid="shift_2" class="key" type="button" style="width: 86.75px;"><i class="icon icon-shitf">shift 2</i></button>
+        <button data-testid="shift_2" class="key" :class="{'active': shift}" type="button" style="width: 86.75px;"><i class="icon icon-shitf">shift 2</i></button>
       </div>
       <div class="row">
-        <button data-testid="ctrl_alt_1" class="key" type="button" style="width: 95px;">Ctrl+Alt</button>
+        <button data-testid="ctrl_alt_1" class="key" :class="{'active': ctrlalt}" type="button" style="width: 95px;">Ctrl+Alt</button>
         <button class="key" type="button" style="width: 293px; font-size: 0px;">whitespace</button>
-        <button data-testid="ctrl_alt_2" class="key" type="button" style="width: 95px;">Ctrl+Alt</button>
+        <button data-testid="ctrl_alt_2" class="key" :class="{'active': ctrlalt}" type="button" style="width: 95px;">Ctrl+Alt</button>
       </div>
     </div>
   </section>
@@ -75,6 +75,9 @@
 <script>
 import { mapState } from 'vuex'
 import { Draggable } from '@/directives/draggable'
+import { shiftEvent } from './shiftEvent'
+import { ctrlAltEvent } from './ctrlAltEvent'
+import { capslockEvent } from './capslockEvent'
 
 export default {
   name: 'Keyboard',
@@ -86,7 +89,10 @@ export default {
       draggableValue: {
         handle: undefined,
         boundingElement: undefined,
-      }
+      },
+      capslock: false,
+      shift: false,
+      ctrlalt: false,
     }
   },
   directives: { Draggable },
@@ -99,15 +105,22 @@ export default {
       this.$store.commit("updateKeyboard", type)
     },
      onKeyVirtualEvents(event) {
-      console.log(event)
       if(event.target.classList.contains('key')) {
         let input = document.querySelector('.App-search-input')
 
         switch(event.target.textContent) {
           case 'capslock':
+            this.capslock = !this.capslock
+            capslockEvent(this.capslock)
+            break;
           case 'shift 1':
           case 'shift 2':
+            this.shift = !this.shift
+            shiftEvent(this.shift)
+            break;
           case 'Ctrl+Alt':
+            this.ctrlalt = !this.ctrlalt
+            ctrlAltEvent(this.ctrlalt)
             break;
           case 'backspace':
             this.backspaceEvent(input)
@@ -123,21 +136,22 @@ export default {
     },
     backspaceEvent(element) {
       if (document.selection) {
-        element.focus();
-        let sel = document.selection.createRange();
+        element.focus()
+        let sel = document.selection.createRange()
         --sel.text;
-        element.focus();
+        element.focus()
       } else if (element.selectionStart || element.selectionStart === 0) {
         let startPos = element.selectionStart;
         let endPos = element.selectionEnd;
-        let textValue = element.value.substring(0, startPos-1) + element.value.substring(endPos, element.value.length);
+        let textValue = element.value.substring(0, startPos-1) + element.value.substring(endPos, element.value.length)
+
         this.$store.commit("updateSearch", textValue)
-        element.focus();
+        element.focus()
         element.selectionStart = startPos;
         element.selectionEnd = --endPos;
       } else {
         this.$store.commit("updateSearch", --element.value)
-        element.focus();
+        element.focus()
       }
     },
     capslockEvent(status) {
@@ -162,22 +176,22 @@ export default {
     },
     insertAtCaretEvent(element, text) {
       if (document.selection) {
-        element.focus();
-        let sel = document.selection.createRange();
+        element.focus()
+        let sel = document.selection.createRange()
         sel.text = text;
-        element.focus();
+        element.focus()
       } else if (element.selectionStart || element.selectionStart === 0) {
         let startPos = element.selectionStart;
         let endPos = element.selectionEnd;
         let textValue = element.value.substring(0, startPos) + text + element.value.substring(endPos, element.value.length)
 
         this.$store.commit("updateSearch", textValue)
-        element.focus();
+        element.focus()
         element.selectionStart = startPos + text.length;
         element.selectionEnd = startPos + text.length;
       } else {
         this.$store.commit("updateSearch", element.value += text)
-        element.focus();
+        element.focus()
       }
     }
   }

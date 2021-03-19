@@ -11,7 +11,7 @@
 import Profile from '@/components/Profile'
 import HeaderApp from '@/components/HeaderApp'
 import SearchApp from '@/components/SearchApp'
-import Keyboard from '@/components/Keyboard'
+import Keyboard from '@/components/Keyboard/Keyboard'
 
 export default {
   name: 'Home',
