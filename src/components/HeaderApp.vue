@@ -25,7 +25,7 @@ export default {
   width: 100%;
   &:hover h1 {
     opacity: 1;
-    transform: scale(1) translateY(-150px);
+    transform: scale(1) translateY(-200%);
   }
   h1, h2 {
     position: absolute;
