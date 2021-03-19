@@ -34,7 +34,7 @@
         <button class="key" type="button">[</button>
       </div>
       <div class="row">
-        <button data-testid="capslock" class="key" :class="{'active': capslock}" type="button" style="width: 53.75px;"><i class="icon icon-capslock">capslock</i></button>
+        <button class="key" :class="{'active': capslock}" type="button" style="width: 53.75px;"><i class="icon icon-capslock">capslock</i></button>
         <button class="key" type="button">a</button>
         <button class="key" type="button">s</button>
         <button class="key" type="button">d</button>
@@ -49,7 +49,7 @@
         <button class="key" type="button">]</button>
       </div>
       <div class="row">
-        <button data-testid="shift_1" class="key" :class="{'active': shift}" type="button" style="width: 37.25px;"><i class="icon icon-shitf">shift 1</i></button>
+        <button class="key" :class="{'active': shift}" type="button" style="width: 37.25px;"><i class="icon icon-shitf">shift 1</i></button>
         <button class="key" type="button">\</button>
         <button class="key" type="button">z</button>
         <button class="key" type="button">x</button>
@@ -61,12 +61,12 @@
         <button class="key" type="button">,</button>
         <button class="key" type="button">.</button>
         <button class="key" type="button">;</button>
-        <button data-testid="shift_2" class="key" :class="{'active': shift}" type="button" style="width: 86.75px;"><i class="icon icon-shitf">shift 2</i></button>
+        <button class="key" :class="{'active': shift}" type="button" style="width: 86.75px;"><i class="icon icon-shitf">shift 2</i></button>
       </div>
       <div class="row">
-        <button data-testid="ctrl_alt_1" class="key" :class="{'active': ctrlalt}" type="button" style="width: 95px;">Ctrl+Alt</button>
+        <button class="key" :class="{'active': ctrlalt}" type="button" style="width: 95px;">Ctrl+Alt</button>
         <button class="key" type="button" style="width: 293px; font-size: 0px;">whitespace</button>
-        <button data-testid="ctrl_alt_2" class="key" :class="{'active': ctrlalt}" type="button" style="width: 95px;">Ctrl+Alt</button>
+        <button class="key" :class="{'active': ctrlalt}" type="button" style="width: 95px;">Ctrl+Alt</button>
       </div>
     </div>
   </section>
