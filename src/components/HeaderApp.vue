@@ -1,7 +1,7 @@
 <template>
   <header class="App-header">
     <h1>Deus é Maior</h1>
-    <img src='../assets/logo.svg' class="App-logo" alt="logo Google" width="272" />
+    <img src='../assets/logo.svg' class="App-logo" alt="logo Google" width="272" height="92" />
     <h2><a href="https://v3.vuejs.org" target="_blank" rel="noreferrer noopener">Vue.js</a></h2>
   </header>
 </template>

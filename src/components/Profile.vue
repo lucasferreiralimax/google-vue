@@ -2,11 +2,11 @@
   <section class="App-profile" v-click-outside="closeEvent">
     <h1 @click="profile = !profile">
       2L
-      <img src="../assets/sinatra.jpg" class="App-profile-foto" alt="Foto Frank Sinatra" width="40" />
+      <img src="../assets/sinatra-40x40.jpg" class="App-profile-foto" alt="Foto Frank Sinatra" width="40" height="40" />
     </h1>
     <div class='App-profile__content' :class="{'show': profile}">
       <a href="https://github.com/lucasferreiralimax" target="_blank" rel="noreferrer noopener">
-        <img src="../assets/sinatra.jpg" class="App-profile-foto big" alt="Foto Frank Sinatra" />
+        <img src="../assets/sinatra-150x150.jpg" class="App-profile-foto big" alt="Foto Frank Sinatra" width="150" height="150" />
       </a>
       <h1>Lucas Lima</h1>
       <h2>lucasferreiralimax@gmail.com</h2>
