@@ -2,7 +2,7 @@
   <section class="App-keyboard" :class="{'active': keyboard}" v-draggable="draggableValue">
     <h1 ref="handler">português brasileiro</h1>
     <button class="exit" type="button" @click="handleKeyboard(false)"><i class="icon icon-exit">X</i></button>
-    <div class="App-keyboard-content">
+    <div class="App-keyboard-content" @click="onKeyVirtualEvents">
       <div class="row">
         <button class="key" type="button">'</button>
         <button class="key" type="button">1</button>
@@ -98,6 +98,88 @@ export default {
     handleKeyboard (type) {
       this.$store.commit("updateKeyboard", type)
     },
+     onKeyVirtualEvents(event) {
+      console.log(event)
+      if(event.target.classList.contains('key')) {
+        let input = document.querySelector('.App-search-input')
+
+        switch(event.target.textContent) {
+          case 'capslock':
+          case 'shift 1':
+          case 'shift 2':
+          case 'Ctrl+Alt':
+            break;
+          case 'backspace':
+            this.backspaceEvent(input)
+            break;
+          case 'whitespace':
+            this.insertAtCaretEvent(input, ' ')
+            break;
+          default:
+            this.insertAtCaretEvent(input, event.target.textContent)
+            break;
+        }
+      }
+    },
+    backspaceEvent(element) {
+      if (document.selection) {
+        element.focus();
+        let sel = document.selection.createRange();
+        --sel.text;
+        element.focus();
+      } else if (element.selectionStart || element.selectionStart === 0) {
+        let startPos = element.selectionStart;
+        let endPos = element.selectionEnd;
+        let textValue = element.value.substring(0, startPos-1) + element.value.substring(endPos, element.value.length);
+        this.$store.commit("updateSearch", textValue)
+        element.focus();
+        element.selectionStart = startPos;
+        element.selectionEnd = --endPos;
+      } else {
+        this.$store.commit("updateSearch", --element.value)
+        element.focus();
+      }
+    },
+    capslockEvent(status) {
+      let keys = document.querySelectorAll('.App-keyboard-content .key')
+      for(let key of keys) {
+        switch(key.textContent) {
+          case 'backspace':
+          case 'whitespace':
+          case 'capslock':
+          case 'Ctrl+Alt':
+          case 'shift 1':
+          case 'shift 2':
+            break;
+          default:
+            status ?
+              key.textContent = key.textContent.toUpperCase()
+              :
+              key.textContent = key.textContent.toLowerCase()
+            break;
+        }
+      }
+    },
+    insertAtCaretEvent(element, text) {
+      if (document.selection) {
+        element.focus();
+        let sel = document.selection.createRange();
+        sel.text = text;
+        element.focus();
+      } else if (element.selectionStart || element.selectionStart === 0) {
+        let startPos = element.selectionStart;
+        let endPos = element.selectionEnd;
+        let textValue = element.value.substring(0, startPos) + text + element.value.substring(endPos, element.value.length)
+
+        this.$store.commit("updateSearch", textValue)
+        element.focus();
+        element.selectionStart = startPos + text.length;
+        element.selectionEnd = startPos + text.length;
+      } else {
+        this.$store.commit("updateSearch", element.value += text)
+        element.focus();
+      }
+    }
   }
 }
 </script>
