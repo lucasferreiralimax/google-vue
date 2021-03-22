@@ -1,7 +1,7 @@
 <template>
-  <footer className="App-footer">
+  <footer class="App-footer">
     <div>
-      <h2 className="brasil">
+      <h2 class="brasil">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" widht="25px" height="25px">
           <circle cx="256" cy="256" r="256" fill="#6da544"/>
           <path fill="#ffda44" d="M256 100.174L467.478 256 256 411.826 44.522 256z"/>
@@ -14,7 +14,7 @@
       </h2>
       <Darkmode type="footer" />
     </div>
-    <hr className="divider" />
+    <hr class="divider" />
     <div>
       <a href="https://github.com/lucasferreiralimax" target="_blank" rel="noreferrer noopener"><strong>@lucasferreiralimax</strong></a>
       <router-link to="/config">Configurações</router-link>
