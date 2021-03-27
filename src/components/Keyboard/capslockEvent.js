@@ -10,10 +10,10 @@ export function capslockEvent(status) {
       case 'shift 2':
         break;
       default:
-        status ?
-          key.textContent = key.textContent.toUpperCase()
+        key.textContent = status ?
+          key.textContent.toUpperCase()
           :
-          key.textContent = key.textContent.toLowerCase()
+          key.textContent.toLowerCase()
         break;
     }
   }
