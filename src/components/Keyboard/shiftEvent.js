@@ -94,7 +94,6 @@ export function shiftEvent(status) {
           key.textContent = key.textContent.toUpperCase()
           :
           key.textContent = key.textContent.toLowerCase()
-        break;
     }
   }
 }

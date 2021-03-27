@@ -55,7 +55,6 @@ export function ctrlAltEvent(status) {
           key.classList.add('hidden')
           :
           key.classList.remove('hidden')
-        break;
     }
   }
 }

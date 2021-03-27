@@ -122,7 +122,6 @@ export default {
             break;
           default:
             this.insertAtCaretEvent(input, event.target.textContent)
-            break;
         }
       }
     },
