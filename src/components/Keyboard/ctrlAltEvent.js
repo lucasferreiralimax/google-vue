@@ -1,14 +1,10 @@
+import noKeysChar from './utils';
+
 export function ctrlAltEvent(status) {
   let keys = document.querySelectorAll('.App-keyboard-content .key')
   for(let key of keys) {
+    if(noKeysChar.includes(key.textContent)) continue
     switch(key.textContent) {
-      case 'backspace':
-      case 'whitespace':
-      case 'capslock':
-      case 'Ctrl+Alt':
-      case 'shift 1':
-      case 'shift 2':
-        break;
       case '1':
       case '!':
       case '¹':
