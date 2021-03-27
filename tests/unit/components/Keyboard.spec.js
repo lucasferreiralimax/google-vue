@@ -1,32 +1,18 @@
 import { shallowMount } from '@vue/test-utils'
-import { nextTick } from 'vue'
 
 import Keyboard from '@/components/Keyboard/Keyboard.vue'
-
+import noKeysChar from '@/components/Keyboard/utils'
 import store from '@/store'
 
 let wrapper;
-
 let keys_mock = ['\'', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'backspace', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '´', '[', 'capslock', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'ç', '~', ']', 'shift 1', '\\', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', ';', 'shift 2', 'Ctrl+Alt', 'whitespace', 'Ctrl+Alt']
 let keys_mock_shift = ['"', '!', '@', '#', '$', '%', '¨', '&', '*', '(', ')', '_', '+', 'backspace', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '`', '{', 'capslock', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'ç', '^', '}', 'shift 1', '\|', 'z', 'x', 'c', 'v', 'b', 'n', 'm', '<', '>', ':', 'shift 2', 'Ctrl+Alt', 'whitespace', 'Ctrl+Alt']
 let keys_mock_ctrl_alt = ['\'', '¹', '²', '³', '£', '¢', '¬', '7', '8', '9', '0', '-', '§', 'backspace', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '´', 'ª', 'capslock', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'ç', '~', 'º', 'shift 1', '\\', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', ';', 'shift 2', 'Ctrl+Alt', 'whitespace', 'Ctrl+Alt']
 
 function keyMockCheck(wrapper, mock, config) {
-  switch(wrapper.text()) {
-    case 'backspace':
-    case 'whitespace':
-    case 'capslock':
-    case 'Ctrl+Alt':
-    case 'shift 1':
-    case 'shift 2':
-      break;
-    default:
-      if(config.upper) {
-        expect(wrapper.text()).toBe(mock.toUpperCase())
-      } else {
-        expect(wrapper.text()).toBe(mock)
-      }
-      break;
+  if(!noKeysChar.includes(wrapper.text())) {
+    if(!config.upper) return expect(wrapper.text()).toBe(mock)
+    expect(wrapper.text()).toBe(mock.toUpperCase())
   }
 }
 
