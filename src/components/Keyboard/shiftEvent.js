@@ -90,10 +90,10 @@ export function shiftEvent(status) {
         status ? key.textContent = ':' : key.textContent = ';'
         break;
       default:
-        status ?
-          key.textContent = key.textContent.toUpperCase()
+        key.textContent = status ?
+          key.textContent.toUpperCase()
           :
-          key.textContent = key.textContent.toLowerCase()
+          key.textContent.toLowerCase()
     }
   }
 }

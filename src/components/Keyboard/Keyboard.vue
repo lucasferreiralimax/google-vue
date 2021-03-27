@@ -78,6 +78,7 @@ import { Draggable } from '@/directives/draggable'
 import { shiftEvent } from './shiftEvent'
 import { ctrlAltEvent } from './ctrlAltEvent'
 import { capslockEvent } from './capslockEvent'
+import { noKeysCharEvents } from './utils';
 
 export default {
   name: 'Keyboard',
@@ -108,20 +109,17 @@ export default {
       if(event.target.classList.contains('key')) {
         let input = document.querySelector('.App-search-input')
 
-        switch(event.target.textContent) {
-          case 'capslock':
-          case 'shift 1':
-          case 'shift 2':
-          case 'Ctrl+Alt':
-            break;
-          case 'backspace':
-            this.backspaceEvent(input)
-            break;
-          case 'whitespace':
-            this.insertAtCaretEvent(input, ' ')
-            break;
-          default:
-            this.insertAtCaretEvent(input, event.target.textContent)
+        if(!noKeysCharEvents.includes(event.target.textContent)) {
+          switch(event.target.textContent) {
+            case 'backspace':
+              this.backspaceEvent(input)
+              break;
+            case 'whitespace':
+              this.insertAtCaretEvent(input, ' ')
+              break;
+            default:
+              this.insertAtCaretEvent(input, event.target.textContent)
+          }
         }
       }
     },
