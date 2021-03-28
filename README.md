@@ -1,4 +1,7 @@
-# google-vue
+# Google Vue
+
+## Screenshot
+![Google Vue Screenshot](https://raw.githubusercontent.com/lucasferreiralimax/google-vue/main/src/assets/google-vue.png)
 
 ## Project setup
 ```
