@@ -21,23 +21,19 @@
 </template>
 
 <script>
+import { ref, watch } from 'vue'
+
 export default {
   name: 'Login',
-  data () {
-    return {
-      user: 'lucasferreiralimax@gmail.com',
-      error: false,
-    }
-  },
-  created () {
-    this.$watch('user', (newVal) => {
-      this.error = newVal ? false : true
-    })
-  },
-  methods: {
-    submitLogin() {
-      this.error = !this.user;
-    }
+  setup() {
+    const user = ref('lucasferreiralimax@gmail.com')
+    const error = ref(false)
+
+    watch(user, (newVal) => { error.value = newVal ? false : true })
+
+    function submitLogin() { error.value = !user.value }
+
+    return { user, error, submitLogin }
   }
 }
 </script>
