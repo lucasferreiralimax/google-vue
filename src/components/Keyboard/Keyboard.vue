@@ -107,19 +107,17 @@ export default {
     },
      onKeyVirtualEvents(event) {
       if(event.target.classList.contains('key')) {
-        let input = document.querySelector('.App-search-input')
+        const input = document.querySelector('.App-search-input')
+        const typeKey = event.target.textContent
+        const keyEvents = {
+          backspace: el => this.backspaceEvent(el),
+          whitespace: el => this.insertAtCaretEvent(el, ' ')
+        }
 
-        if(!noKeysCharEvents.includes(event.target.textContent)) {
-          switch(event.target.textContent) {
-            case 'backspace':
-              this.backspaceEvent(input)
-              break;
-            case 'whitespace':
-              this.insertAtCaretEvent(input, ' ')
-              break;
-            default:
-              this.insertAtCaretEvent(input, event.target.textContent)
-          }
+        if(!noKeysCharEvents.includes(typeKey)) {
+          return keyEvents[typeKey]
+            ? keyEvents[typeKey](input)
+            : this.insertAtCaretEvent(input, typeKey)
         }
       }
     },
