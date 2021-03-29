@@ -10,18 +10,27 @@
 </template>
 
 <script>
+import { ref, onUnmounted } from 'vue'
+
 export default {
   name: 'NotfoundApp',
-  data() {
-    return {
-      url: window.location.pathname
-    }
+  setup() {
+    const url = ref(window.location.pathname)
+    document.body.classList.add('notfound')
+
+    onUnmounted(() => {
+      document.body.classList.remove('notfound')
+    })
+
+    return { url }
   }
 }
 </script>
 
 <style lang="scss">
-body { background: url('../assets/robot.png') 80% 30% no-repeat; }
+body.notfound {
+  background: var(--main-bg-color-primary) url('../assets/robot.png') 80% 30% no-repeat;
+}
 
 .App-notfound {
   box-sizing: border-box;
