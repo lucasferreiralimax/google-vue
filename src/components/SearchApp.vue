@@ -27,31 +27,43 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { computed  } from 'vue'
+import { useStore } from 'vuex'
 
 export default {
   name: 'SearchApp',
-  computed: mapState({
-    search: state => state.search,
-    keyboard: state => state.keyboard,
-    voice: state => state.voice,
-  }),
-  methods: {
-    searchGoogle() {
-      if(this.search) window.location = `https://www.google.com.br/search?&q=${this.search}`;
-    },
-    searchUpdate(e) {
-      this.$store.commit("updateSearch", e.target.value)
-    },
-    searchClean() {
-      this.$store.commit("updateSearch", "")
-    },
-    toggleKeyboard () {
-      this.$store.commit("updateKeyboard", !this.keyboard)
-    },
-    activeVoice () {
-      this.$store.commit("updateVoice", true)
-    },
+  setup() {
+    const store = useStore()
+    const search = computed(() => store.state.search)
+    const keyboard = computed(() => store.state.keyboard)
+    const voice = computed(() => store.state.voice)
+
+    function searchGoogle() {
+      if(search.value) window.location = `https://www.google.com.br/search?&q=${search.value}`;
+    }
+    function searchUpdate(e) {
+      store.commit("updateSearch", e.target.value)
+    }
+    function searchClean() {
+      store.commit("updateSearch", "")
+    }
+    function toggleKeyboard () {
+      store.commit("updateKeyboard", !keyboard.value)
+    }
+    function activeVoice () {
+      store.commit("updateVoice", true)
+    }
+
+    return {
+      search,
+      keyboard,
+      voice,
+      searchGoogle,
+      searchUpdate,
+      searchClean,
+      toggleKeyboard,
+      activeVoice
+    }
   }
 }
 </script>
