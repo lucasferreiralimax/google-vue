@@ -21,20 +21,16 @@
 </template>
 
 <script>
+import { ref } from 'vue'
 import { clickOutside } from '@/directives/clickOutside.js'
 
 export default {
   name: 'Profile',
-  data() {
-    return {
-      profile: false,
-    }
-  },
-  directives: {'click-outside': clickOutside, },
-  methods: {
-    closeEvent: function () {
-      this.profile = false
-    }
+  directives: {'click-outside': clickOutside},
+  setup() {
+    const profile = ref(false)
+    function closeEvent() { profile.value = false }
+    return { profile, closeEvent }
   }
 }
 </script>
