@@ -33,12 +33,13 @@
 </template>
 
 <script>
+import { ref } from 'vue'
+
 export default {
   name: 'FooterApp',
-  data () {
-    return {
-      nav: false,
-    }
+  setup() {
+    const nav = ref(false)
+    return { nav }
   }
 }
 </script>
