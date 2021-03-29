@@ -36,7 +36,6 @@ export default {
     const store = useStore()
     const search = computed(() => store.state.search)
     const keyboard = computed(() => store.state.keyboard)
-    const voice = computed(() => store.state.voice)
 
     function searchGoogle() {
       if(search.value) window.location = `https://www.google.com.br/search?&q=${search.value}`;
@@ -57,7 +56,6 @@ export default {
     return {
       search,
       keyboard,
-      voice,
       searchGoogle,
       searchUpdate,
       searchClean,
