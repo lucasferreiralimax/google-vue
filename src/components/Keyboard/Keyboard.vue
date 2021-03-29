@@ -73,6 +73,8 @@
 </template>
 
 <script>
+import { toRefs, ref, reactive, onMounted } from 'vue'
+import { useStore } from 'vuex'
 import { mapState } from 'vuex'
 import { Draggable } from '@/directives/draggable'
 import { shiftEvent } from './shiftEvent'
@@ -82,30 +84,26 @@ import { noKeysCharEvents } from './utils';
 
 export default {
   name: 'Keyboard',
-  computed: mapState({
-    keyboard: state => state.keyboard,
-  }),
-  data () {
-    return {
-      draggableValue: {
-        handle: undefined,
-        boundingElement: undefined,
-      },
+  computed: mapState({ keyboard: state => state.keyboard }),
+  directives: { Draggable },
+  setup() {
+    const store = useStore()
+    const handler = ref(null)
+    const state = reactive({
+      draggableValue: { handle: null, boundingElement: null },
       capslock: false,
       shift: false,
-      ctrlalt: false,
-    }
-  },
-  directives: { Draggable },
-  mounted () {
-    this.draggableValue.handle = this.$refs.handler
-    this.draggableValue.boundingElement = document.querySelector('.App')
-  },
-  methods: {
-    handleKeyboard (type) {
-      this.$store.commit("updateKeyboard", type)
-    },
-     onKeyVirtualEvents(event) {
+      ctrlalt: false
+    })
+
+    onMounted(() => {
+      state.draggableValue.handle = handler.value
+      state.draggableValue.boundingElement = document.querySelector('.App')
+    })
+
+    function handleKeyboard (type) { store.commit("updateKeyboard", type) }
+
+    function onKeyVirtualEvents(event) {
       if(event.target.classList.contains('key')) {
         const input = document.querySelector('.App-search-input')
         const typeKey = event.target.textContent
@@ -120,20 +118,24 @@ export default {
             : this.insertAtCaretEvent(input, typeKey)
         }
       }
-    },
-    handleCapslock() {
-      this.capslock = !this.capslock
-      capslockEvent(this.capslock)
-    },
-    handleShift() {
-      this.shift = !this.shift
-      shiftEvent(this.shift)
-    },
-    handleCtrlAlt() {
-      this.ctrlalt = !this.ctrlalt
-      ctrlAltEvent(this.ctrlalt)
-    },
-    backspaceEvent(element) {
+    }
+
+    function handleCapslock() {
+      state.capslock = !state.capslock
+      capslockEvent(state.capslock)
+    }
+
+    function handleShift() {
+      state.shift = !state.shift
+      shiftEvent(state.shift)
+    }
+
+    function handleCtrlAlt() {
+      state.ctrlalt = !state.ctrlalt
+      ctrlAltEvent(state.ctrlalt)
+    }
+
+    function backspaceEvent(element) {
       if (document.selection) {
         element.focus()
         let sel = document.selection.createRange()
@@ -144,16 +146,17 @@ export default {
         let endPos = element.selectionEnd;
         let textValue = element.value.substring(0, startPos-1) + element.value.substring(endPos, element.value.length)
 
-        this.$store.commit("updateSearch", textValue)
+        store.commit("updateSearch", textValue)
         element.focus()
         element.selectionStart = startPos;
         element.selectionEnd = --endPos;
       } else {
-        this.$store.commit("updateSearch", --element.value)
+        store.commit("updateSearch", --element.value)
         element.focus()
       }
-    },
-    insertAtCaretEvent(element, text) {
+    }
+
+    function insertAtCaretEvent(element, text) {
       if (document.selection) {
         element.focus()
         let sel = document.selection.createRange()
@@ -164,14 +167,25 @@ export default {
         let endPos = element.selectionEnd;
         let textValue = element.value.substring(0, startPos) + text + element.value.substring(endPos, element.value.length)
 
-        this.$store.commit("updateSearch", textValue)
+        store.commit("updateSearch", textValue)
         element.focus()
         element.selectionStart = startPos + text.length;
         element.selectionEnd = startPos + text.length;
       } else {
-        this.$store.commit("updateSearch", element.value += text)
+        store.commit("updateSearch", element.value += text)
         element.focus()
       }
+    }
+
+    return {
+      ...toRefs(state),
+      handleKeyboard,
+      onKeyVirtualEvents,
+      handleCapslock,
+      handleShift,
+      handleCtrlAlt,
+      backspaceEvent,
+      insertAtCaretEvent
     }
   }
 }
