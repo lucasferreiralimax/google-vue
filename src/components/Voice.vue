@@ -1,7 +1,7 @@
 <template>
   <section class='App-voice' :class="{'active': voice }">
     <button class="exit" type="button" @click="disableVoice()"><i class="icon icon-exit">X</i></button>
-    <p>Fale agora</p>
+    <p>{{ textCallback }}</p>
     <button type="button" class='btn-voice' :class="{'active': animationButton}" @click="desactiveVoice">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
         <path d="M17 11.998c0 2.76-2.23 5-4.99 5l-.002.002a4.994 4.994 0 01-4.979-5h-2c0 3.52 2.59 6.433 5.98 6.92v3.078h.01V22h2v-3.08h-.01A6.982 6.982 0 0019 11.998z"/>
@@ -13,119 +13,131 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { reactive, toRefs, computed, onMounted, onUpdated } from 'vue'
+import { useStore } from 'vuex'
 
 export default {
   name: 'VoiceApp',
-  computed: mapState({
-    voice: state => state.voice,
-    search: state => state.search,
-  }),
-  data() {
-    return {
+  setup() {
+    const store = useStore()
+    const search = computed(() => store.state.search)
+    const voice = computed(() => store.state.voice)
+    const keyboard = computed(() => store.state.keyboard)
+    const state = reactive({
+      textCallback: 'Fale agora',
       final_transcript: '',
       recognizing: false,
       ignore_onend: null,
       recognition: null,
       animationButton: false,
-    }
-  },
-  mounted() {
-    this.voiceSetup()
-    this.voice ? this.activeVoice() : this.desactiveVoice()
-  },
-  updated() {
-    this.voice ? this.activeVoice() : this.desactiveVoice()
-  },
-  methods: {
-    disableVoice () {
-      this.$store.commit("updateVoice", false)
-      this.desactiveVoice()
-    },
-    activeVoice() {
-      if(!this.recognizing) {
-        this.recognizing = true;
-        this.final_transcript = '';
-        this.recognition.start();
-      }
-    },
-    desactiveVoice() {
-      if(this.recognizing) {
-        this.recognizing = false;
-        this.recognition.stop();
-      }
-    },
-    voiceSetup () {
-      let self = this;
+    })
 
+    onMounted(() => {
+      voiceSetup()
+      voice.value ? activeVoice() : desactiveVoice()
+    })
+
+    onUpdated(() => {
+      voice.value ? activeVoice() : desactiveVoice()
+    })
+
+    function disableVoice () {
+      store.commit("updateVoice", false)
+      desactiveVoice()
+    }
+
+    function activeVoice() {
+      if(!state.recognizing) {
+        state.recognizing = true;
+        state.final_transcript = '';
+        state.recognition.start();
+      }
+    }
+
+    function desactiveVoice() {
+      if(state.recognizing) {
+        state.recognizing = false;
+        state.recognition.stop();
+      }
+    }
+
+    function voiceSetup () {
       if (!('webkitSpeechRecognition' in window)) {
         console.log('atualize SpeechRecognition')
       } else {
-        self.recognition = new window.webkitSpeechRecognition();
+        state.recognition = new window.webkitSpeechRecognition();
 
-        self.recognition.continuous = false;
-        self.recognition.interimResults = true;
+        state.recognition.continuous = false;
+        state.recognition.interimResults = true;
+        state.final_transcript = '';
+        state.ignore_onend = false;
+        state.textCallback = 'Ative o microfone';
 
-        self.final_transcript = '';
-        self.ignore_onend = false;
-        document.querySelector('.App-voice p').textContent = 'Ative o microfone';
-
-        self.recognition.onstart = function() {
-          self.recognizing = true;
-          document.querySelector('.App-voice p').textContent = 'Fale agora';
-          self.animationButton = true;
-          console.log('onstart voice');
+        state.recognition.onstart = () => {
+          state.recognizing = true;
+          state.textCallback = 'Fale agora';
+          state.animationButton = true;
         };
 
-        self.recognition.onerror = function(event) {
-          self.animationButton = false;
+        state.recognition.onerror = (event) => {
+          state.animationButton = false;
           if (event.error === 'no-speech') {
             console.log('onerror voice no-speech');
-            self.ignore_onend = true;
+            state.ignore_onend = true;
           }
           if (event.error === 'audio-capture') {
             console.log('onerror audio-capture');
-            self.ignore_onend = true;
+            state.ignore_onend = true;
           }
           if (event.error === 'not-allowed') {
-            document.querySelector('.App-voice p').textContent = 'Ative o microfone';
-            self.ignore_onend = true;
+            state.textCallback = 'Ative o microfone';
+            state.ignore_onend = true;
           }
         };
 
-        self.recognition.onend = function() {
-          self.recognizing = false;
-          if (self.ignore_onend) {
+        state.recognition.onend = () => {
+          state.recognizing = false;
+          if (state.ignore_onend) {
             return;
           }
-          if (!self.final_transcript) {
+          if (!state.final_transcript) {
             return;
           }
-          self.animationButton = false;
-          self.$store.commit("updateVoice", false)
-          document.querySelector('.App-voice p').textContent = '';
+          state.animationButton = false;
+          store.commit("updateVoice", false)
+          state.textCallback = '';
         };
 
-        self.recognition.onresult = function(event) {
-          var interim_transcript = '';
-          for (var i = event.resultIndex; i < event.results.length; ++i) {
+        state.recognition.onresult = (event) => {
+          let interim_transcript = '';
+          for (let i = event.resultIndex; i < event.results.length; ++i) {
             if (event.results[i].isFinal) {
-              self.final_transcript += event.results[i][0].transcript;
+              state.final_transcript += event.results[i][0].transcript;
             } else {
               interim_transcript += event.results[i][0].transcript;
             }
           }
           if (interim_transcript) {
-            document.querySelector('.App-voice p').textContent = interim_transcript;
+            state.textCallback = interim_transcript;
           }
-          if (self.final_transcript) {
+          if (state.final_transcript) {
             document.querySelector('body').removeAttribute('style');
-            self.$store.commit("updateSearch", self.final_transcript)
-            self.recognition.stop();
+            store.commit("updateSearch", state.final_transcript)
+            state.recognition.stop();
           }
-        };
+        }
       }
-    },
+    }
+
+    return {
+      ...toRefs(state),
+      search,
+      voice,
+      keyboard,
+      disableVoice,
+      activeVoice,
+      desactiveVoice
+    }
   }
 }
 </script>
