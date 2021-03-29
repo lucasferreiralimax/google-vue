@@ -1,6 +1,6 @@
 import noKeysChar from './utils';
 
-export function shiftEvent(status) {
+export default function shiftEvent(status) {
   let keys = document.querySelectorAll('.App-keyboard-content .key')
   for(let key of keys) {
     if(noKeysChar.includes(key.textContent)) continue

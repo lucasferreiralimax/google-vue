@@ -73,14 +73,10 @@
 </template>
 
 <script>
+import { noKeysCharEvents, shiftEvent, ctrlAltEvent, capslockEvent } from './utils';
 import { toRefs, ref, reactive, onMounted } from 'vue'
-import { useStore } from 'vuex'
-import { mapState } from 'vuex'
+import { useStore, mapState } from 'vuex'
 import { Draggable } from '@/directives/draggable'
-import { shiftEvent } from './shiftEvent'
-import { ctrlAltEvent } from './ctrlAltEvent'
-import { capslockEvent } from './capslockEvent'
-import { noKeysCharEvents } from './utils';
 
 export default {
   name: 'Keyboard',
