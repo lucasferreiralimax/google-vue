@@ -1,5 +1,5 @@
 <template>
-  <button type="button" class='darkmode' :class="{'footer': type, 'active': darkmode}" aria-label="Toggle darkmode" @click="togleMode()">
+  <button type="button" class='darkmode' :class="{'footer': type, 'active': darkmode}" aria-label="Toggle darkmode" @click="toggleMode()">
     <svg v-if="type" width="25px" height="25px" viewBox="-5 -5 34 34" fill="var(--main-color)">
       <path v-if="darkmode" d="M12 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zM4.929 4.929a1 1 0 011.414 0l.707.707A1 1 0 115.636 7.05l-.707-.707a1 1 0 010-1.414zm14.142 0a1 1 0 010 1.414l-.707.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM7 12a5 5 0 1110 0 5 5 0 01-10 0zm-5 0a1 1 0 011-1h1a1 1 0 110 2H3a1 1 0 01-1-1zm17 0a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zm-2.05 4.95a1 1 0 011.414 0l.707.707a1 1 0 01-1.414 1.414l-.707-.707a1 1 0 010-1.414zm-11.314 0a1 1 0 011.414 1.414l-.707.707a1 1 0 01-1.414-1.414l.707-.707zM12 19a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1z"/>
       <path v-else d="M9.353 2.939a1 1 0 01.22 1.08 8 8 0 0010.408 10.408 1 1 0 011.301 1.3A10.003 10.003 0 0112 22C6.477 22 2 17.523 2 12c0-4.207 2.598-7.805 6.273-9.282a1 1 0 011.08.22z"/>
@@ -12,25 +12,26 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { computed  } from 'vue'
+import { useStore } from 'vuex'
 
 export default {
   name: 'Darkmode',
   props: ['type'],
-  computed: mapState({
-    darkmode: state => state.darkmode,
-  }),
-  created() {
-    this.dark(JSON.parse(localStorage.getItem("darkmode")))
-  },
-  methods: {
-    togleMode () {
-      this.$store.commit("updateDarkmode", !this.darkmode)
-      this.dark(this.darkmode)
-    },
-    dark(type) {
+  setup() {
+    const store = useStore()
+    const darkmode = computed(() => store.state.darkmode)
+
+    dark(JSON.parse(localStorage.getItem("darkmode")))
+
+    function toggleMode () {
+      store.commit("updateDarkmode", !darkmode.value)
+      dark(darkmode.value)
+    }
+
+    function dark(type) {
       localStorage.setItem("darkmode", type)
-      this.$store.commit('updateDarkmode', type)
+      store.commit('updateDarkmode', type)
       if(!type) {
         document.documentElement.style.setProperty('--main-color', '#000');
         document.documentElement.style.setProperty('--main-color-rgb', '0,0,0');
@@ -56,6 +57,11 @@ export default {
         document.documentElement.style.setProperty('--input-bg-color-hover', '#303134');
         document.documentElement.style.setProperty('--input-drop-shadow', '#171717');
       }
+    }
+    return {
+      toggleMode,
+      darkmode,
+      dark
     }
   }
 }
