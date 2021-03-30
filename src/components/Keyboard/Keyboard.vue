@@ -73,7 +73,8 @@
 </template>
 
 <script>
-import { noKeysCharEvents, shiftEvent, ctrlAltEvent, capslockEvent } from './utils';
+import { shiftEvent, ctrlAltEvent, capslockEvent, backspaceEvent, insertAtCaretEvent } from './events';
+import { noKeysCharEvents } from './utils';
 import { toRefs, ref, reactive, onMounted } from 'vue'
 import { useStore, mapState } from 'vuex'
 import { Draggable } from '@/directives/draggable'
@@ -104,14 +105,14 @@ export default {
         const input = document.querySelector('.App-search-input')
         const typeKey = event.target.textContent
         const keyEvents = {
-          backspace: el => this.backspaceEvent(el),
-          whitespace: el => this.insertAtCaretEvent(el, ' ')
+          backspace: el => backspaceEvent(el),
+          whitespace: el => insertAtCaretEvent(el, ' ')
         }
 
         if(!noKeysCharEvents.includes(typeKey)) {
           return keyEvents[typeKey]
             ? keyEvents[typeKey](input)
-            : this.insertAtCaretEvent(input, typeKey)
+            : insertAtCaretEvent(input, typeKey)
         }
       }
     }
@@ -131,57 +132,13 @@ export default {
       ctrlAltEvent(state.ctrlalt)
     }
 
-    function backspaceEvent(element) {
-      if (document.selection) {
-        element.focus()
-        let sel = document.selection.createRange()
-        --sel.text;
-        element.focus()
-      } else if (element.selectionStart || element.selectionStart === 0) {
-        let startPos = element.selectionStart;
-        let endPos = element.selectionEnd;
-        let textValue = element.value.substring(0, startPos-1) + element.value.substring(endPos, element.value.length)
-
-        store.commit("updateSearch", textValue)
-        element.focus()
-        element.selectionStart = startPos;
-        element.selectionEnd = --endPos;
-      } else {
-        store.commit("updateSearch", --element.value)
-        element.focus()
-      }
-    }
-
-    function insertAtCaretEvent(element, text) {
-      if (document.selection) {
-        element.focus()
-        let sel = document.selection.createRange()
-        sel.text = text;
-        element.focus()
-      } else if (element.selectionStart || element.selectionStart === 0) {
-        let startPos = element.selectionStart;
-        let endPos = element.selectionEnd;
-        let textValue = element.value.substring(0, startPos) + text + element.value.substring(endPos, element.value.length)
-
-        store.commit("updateSearch", textValue)
-        element.focus()
-        element.selectionStart = startPos + text.length;
-        element.selectionEnd = startPos + text.length;
-      } else {
-        store.commit("updateSearch", element.value += text)
-        element.focus()
-      }
-    }
-
     return {
       ...toRefs(state),
       handleKeyboard,
       onKeyVirtualEvents,
       handleCapslock,
       handleShift,
-      handleCtrlAlt,
-      backspaceEvent,
-      insertAtCaretEvent
+      handleCtrlAlt
     }
   }
 }

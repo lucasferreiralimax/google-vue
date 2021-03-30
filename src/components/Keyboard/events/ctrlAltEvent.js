@@ -1,4 +1,4 @@
-import noKeysChar from './utils';
+import noKeysChar from '../utils';
 
 export default function ctrlAltEvent(status) {
   let keys = document.querySelectorAll('.App-keyboard-content .key')
