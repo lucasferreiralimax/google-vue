@@ -1,0 +1,15 @@
+describe('Test render login page', () => {
+  it('Render login with title and link', () => {
+    cy.visit('/login')
+    cy.contains('.App-login h1', 'Fazer login')
+    cy.contains('.App-login h1 ~ p', 'Use sua Conta do Google')
+    cy.get('.App-logo').invoke('attr', 'alt').should('contain', 'logo Google')
+    cy.contains('.App-login a:nth-of-type(1)', 'Esqueceu seu e-mail?')
+    cy.contains('.App-login p', 'Não está no seu computador? Use o modo visitante para fazer login com privacidade. Saiba mais')
+    cy.contains('.App-login p a', 'Saiba mais')
+    cy.get('.App-login-input').should('exist')
+    cy.contains('.App-login-label', 'Email ou telefone')
+    cy.get('.App-login-new.btn').should('exist')
+    cy.get('.App-login-next.btn.primary').should('exist')
+  })
+})
