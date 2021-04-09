@@ -4,7 +4,13 @@
     <h1>Configurações</h1>
     <Darkmode />
     <br/>
-    <a href="https://github.com/lucasferreiralimax/google-vue" target="_blank" rel="noreferrer noopener">Estude o código fonte desse projeto no Github acesse aqui.</a>
+    <a
+      href="https://github.com/lucasferreiralimax/google-vue"
+      rel="noreferrer noopener"
+      target="_blank"
+    >
+      Estude o código fonte desse projeto no Github acesse aqui.
+    </a>
   </form>
 </template>
 

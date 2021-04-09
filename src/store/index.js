@@ -21,8 +21,4 @@ export default createStore({
       state.search = value
     },
   },
-  actions: {
-  },
-  modules: {
-  }
 })

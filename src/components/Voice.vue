@@ -1,8 +1,19 @@
 <template>
   <section class='App-voice' :class="{'active': voice }">
-    <button class="exit" type="button" @click="disableVoice()"><i class="icon icon-exit">X</i></button>
+    <button
+      class="exit"
+      type="button"
+      @click="disableVoice()"
+    >
+      <i class="icon icon-exit">X</i>
+    </button>
     <p>{{ textCallback }}</p>
-    <button type="button" class='btn-voice' :class="{'active': animationButton}" @click="desactiveVoice">
+    <button
+      class='btn-voice'
+      :class="{'active': animationButton}"
+      @click="desactiveVoice"
+      type="button"
+    >
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
         <path d="M17 11.998c0 2.76-2.23 5-4.99 5l-.002.002a4.994 4.994 0 01-4.979-5h-2c0 3.52 2.59 6.433 5.98 6.92v3.078h.01V22h2v-3.08h-.01A6.982 6.982 0 0019 11.998z"/>
         <path fill="none" d="M0 0h24v24H0z"/>
