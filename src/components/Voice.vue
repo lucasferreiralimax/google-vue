@@ -224,6 +224,7 @@ export default {
   transform: scale(0);
   user-select: none;
   width: var(--mic-volume-size);
+  min-width: var(--mic-volume-size);
   &.active {
     animation: 1s voiceAnimation infinite alternate;
     opacity: 1;
