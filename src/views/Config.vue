@@ -1,15 +1,16 @@
 <template>
   <form class="App-config">
     <Profile/>
-    <h1>Configurações</h1>
+    <h1>{{ $t('text.config') }}</h1>
     <Darkmode />
+    <TranslateSelect/>
     <br/>
     <a
       href="https://github.com/lucasferreiralimax/google-vue"
       rel="noreferrer noopener"
       target="_blank"
     >
-      Estude o código fonte desse projeto no Github acesse aqui.
+      {{ $t('text.github') }}
     </a>
   </form>
 </template>
@@ -17,10 +18,11 @@
 <script>
 import Darkmode from '@/components/Darkmode'
 import Profile from '@/components/Profile'
+import TranslateSelect from '@/components/TranslateSelect'
 
 export default {
   name: 'ConfigApp',
-  components: { Darkmode, Profile }
+  components: { Darkmode, Profile, TranslateSelect }
 }
 </script>
 
@@ -28,6 +30,10 @@ export default {
 .App-config {
   padding: 1em;
   text-align: center;
+  display: inline-flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
   input { cursor: pointer; }
   a {
     box-sizing: border-box;
