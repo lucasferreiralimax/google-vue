@@ -1,0 +1,41 @@
+{
+  "languages": {
+    "pt": "Portuguese",
+    "en": "English"
+  },
+  "menu": {
+    "home": "Home",
+    "login": "Login",
+    "config": "Configuration",
+    "arial_label": {
+      "menu_button": "Toggle menu show"
+    }
+  },
+  "search_component": {
+    "keyboard": "Virtual keyboard",
+    "alt_keyboard": "Keyboard Icon",
+    "clean": "Clean",
+    "search_voice": "Voice search",
+    "search": "Google search",
+    "lucky": "I'm lucky",
+    "search_label": "Search or enter a URL"
+  },
+  "voice": {
+    "update": "Update the SpeechRecognition",
+    "error_no_speech": "On error voice no-speech",
+    "error_audio_capture": "On error audio-capture",
+    "active_mic": "Activate the microphone",
+    "speak_now": "Speak Now"
+  },
+  "text": {
+    "GodIsBig": "God is Big",
+    "config": "Configuration",
+    "darkmode": "Darkmode",
+    "2L_search": "2L at sea",
+    "2L_lucky": "2L remember always in faith not in luck, firm and strong.",
+    "github": "Study the source code of this project on Github access here."
+  },
+  "alt": {
+    "LogoGoogle": "Logo Google"
+  }
+}
