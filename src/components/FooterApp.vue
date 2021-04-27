@@ -17,7 +17,7 @@
     <hr class="divider" />
     <div>
       <a href="https://github.com/lucasferreiralimax" target="_blank" rel="noreferrer noopener"><strong>@lucasferreiralimax</strong></a>
-      <router-link to="/config">Configurações</router-link>
+      <router-link to="/config">{{ $t('text.config') }}</router-link>
     </div>
   </footer>
 </template>
