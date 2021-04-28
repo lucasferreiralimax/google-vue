@@ -26,16 +26,18 @@
 <script>
 import { reactive, toRefs, computed, onMounted, onUpdated } from 'vue'
 import { useStore } from 'vuex'
+import { useI18n } from 'vue-i18n';
 
 export default {
   name: 'VoiceApp',
   setup() {
     const store = useStore()
+    const { t } = useI18n({ useScope: 'global' });
     const search = computed(() => store.state.search)
     const voice = computed(() => store.state.voice)
     const keyboard = computed(() => store.state.keyboard)
     const state = reactive({
-      textCallback: 'Fale agora',
+      textCallback: t('voice.speak_now'),
       final_transcript: '',
       recognizing: false,
       ignore_onend: null,
@@ -74,7 +76,7 @@ export default {
 
     function voiceSetup () {
       if (!('webkitSpeechRecognition' in window)) {
-        console.log('atualize SpeechRecognition')
+        console.log(t('voice.update'))
       } else {
         state.recognition = new window.webkitSpeechRecognition();
 
@@ -82,26 +84,26 @@ export default {
         state.recognition.interimResults = true;
         state.final_transcript = '';
         state.ignore_onend = false;
-        state.textCallback = 'Ative o microfone';
+        state.textCallback = t('voice.active_mic');
 
         state.recognition.onstart = () => {
           state.recognizing = true;
-          state.textCallback = 'Fale agora';
+          state.textCallback = t('voice.speak_now');
           state.animationButton = true;
         };
 
         state.recognition.onerror = (event) => {
           state.animationButton = false;
           if (event.error === 'no-speech') {
-            console.log('onerror voice no-speech');
+            console.log(t('voice.error_no_speech'));
             state.ignore_onend = true;
           }
           if (event.error === 'audio-capture') {
-            console.log('onerror audio-capture');
+            console.log(t('voice.error_audio_capture'));
             state.ignore_onend = true;
           }
           if (event.error === 'not-allowed') {
-            state.textCallback = 'Ative o microfone';
+            state.textCallback = t('voice.active_mic');
             state.ignore_onend = true;
           }
         };
@@ -147,7 +149,8 @@ export default {
       keyboard,
       disableVoice,
       activeVoice,
-      desactiveVoice
+      desactiveVoice,
+      t
     }
   }
 }
