@@ -27,6 +27,19 @@
     "active_mic": "Ative o microfone",
     "speak_now": "Fale agora"
   },
+  "login": {
+    "title": "Fazer login",
+    "description": "Use sua Conta do Google",
+    "text": "Não está no seu computador? Use o modo visitante para fazer login com privacidade.",
+    "text_more": "Saiba mais",
+    "form_email": {
+      "label": "Email ou telefone",
+      "error": "Digite um e-mail ou número de telefone"
+    },
+    "remember": "Esqueceu seu e-mail?",
+    "new": "Criar conta",
+    "next": "Próxima"
+  },
   "text": {
     "GodIsBig": "Deus é Maior",
     "config": "Configurações",

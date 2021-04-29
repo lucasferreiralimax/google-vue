@@ -27,6 +27,19 @@
     "active_mic": "Activate the microphone",
     "speak_now": "Speak Now"
   },
+  "login": {
+    "title": "Login",
+    "description": "Use your Google Account",
+    "text": "Not on your computer? Use guest mode to log in privately.",
+    "text_more": "know more",
+    "form_email": {
+      "label": "Email or phone",
+      "error": "Enter an email or phone number"
+    },
+    "remember": "Forgot your email?",
+    "new": "Create an account",
+    "next": "Next"
+  },
   "text": {
     "GodIsBig": "God is Big",
     "config": "Configuration",

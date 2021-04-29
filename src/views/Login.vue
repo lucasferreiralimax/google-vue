@@ -1,31 +1,33 @@
 <template>
   <form class="App-login">
     <img src='../assets/logo.svg' class="App-logo" alt="logo Google" width="75" />
-    <h1>Fazer login</h1>
-    <p>Use sua Conta do Google</p>
+    <h1>{{ t('login.title') }}</h1>
+    <p>{{ t('login.description') }}</p>
     <div class='App-login-control' :class="{'placeholder': user, 'error': error}">
       <input id="user" type="text" class="App-login-input" v-model="user" />
-      <label for="user" class="App-login-label">Email ou telefone</label>
+      <label for="user" class="App-login-label">{{ t('login.form_email.label') }}</label>
       <div class="App-login-error" v-if="error">
         <svg aria-hidden="true" fill="currentColor" focusable="false" width="16px" height="16px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"></path>
         </svg>
-        Digite um e-mail ou número de telefone
+        {{ t('login.form_email.error') }}
       </div>
     </div>
-    <a href="https://github.com/lucasferreiralimax" target="_blank" rel="noreferrer noopener">Esqueceu seu e-mail?</a>
-    <p>Não está no seu computador? Use o modo visitante para fazer login com privacidade. <a href="https://github.com/lucasferreiralimax" target="_blank" rel="noreferrer noreferrer noopener">Saiba mais</a></p>
-    <button type="button" class="App-login-new btn">Criar conta</button>
-    <button type="button" class="App-login-next btn primary" @click="submitLogin">Próxima</button>
+    <a href="https://github.com/lucasferreiralimax" target="_blank" rel="noreferrer noopener">{{ t('login.remember') }}</a>
+    <p>{{ t('login.text') }} <a href="https://github.com/lucasferreiralimax" target="_blank" rel="noreferrer noreferrer noopener">{{ t('login.text_more') }}</a></p>
+    <button type="button" class="App-login-new btn">{{ t('login.new') }}</button>
+    <button type="button" class="App-login-next btn primary" @click="submitLogin">{{ t('login.next') }}</button>
   </form>
 </template>
 
 <script>
 import { ref, watch } from 'vue'
+import { useI18n } from 'vue-i18n';
 
 export default {
   name: 'Login',
   setup() {
+    const { t } = useI18n({ useScope: 'global' });
     const user = ref('lucasferreiralimax@gmail.com')
     const error = ref(false)
 
@@ -33,7 +35,7 @@ export default {
 
     function submitLogin() { error.value = !user.value }
 
-    return { user, error, submitLogin }
+    return { t, user, error, submitLogin }
   }
 }
 </script>
