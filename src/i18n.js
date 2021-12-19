@@ -3,7 +3,7 @@ import { createI18n } from 'vue-i18n';
 
 let i18n;
 
-export const SUPPORT_LOCALES = ['pt-BR', 'en-US'];
+export const SUPPORT_LOCALES = ['pt-BR', 'en-US', 'es-ES', 'fr-FR'];
 
 export function setI18nLanguage(locale) {
   loadLocaleMessages(locale);

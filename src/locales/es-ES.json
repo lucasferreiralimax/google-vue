@@ -1,0 +1,58 @@
+{
+  "languages": {
+    "pt": "Portugués",
+    "en": "Inglés",
+    "es": "Español",
+    "fr": "Français"
+  },
+  "menu": {
+    "home": "Comienzo",
+    "login": "Login",
+    "config": "Configurações",
+    "arial_label": {
+      "menu_button": "Alternar menú y mostrar"
+    }
+  },
+  "search_component": {
+    "keyboard": "Teclado Virtual",
+    "alt_keyboard": "Icono Teclado",
+    "clean": "Limpiar",
+    "search_voice": "Búsqueda por voz",
+    "search": "Pesquisa Google",
+    "lucky": "Estoy con suerte",
+    "search_label": "Busca o ingresa una URL"
+  },
+  "voice": {
+    "update": "Actualizar el SpeechRecognition",
+    "error_no_speech": "Rrror de voz sin palabras",
+    "error_audio_capture": "Erro captura de áudio",
+    "active_mic": "Activar el micrófono",
+    "speak_now": "Hable ahora"
+  },
+  "login": {
+    "title": "Hacer login",
+    "description": "Utilice su cuenta de Google",
+    "text": "¿No en tu computadora? Utilice el modo de invitado para iniciar sesión con privacidad.",
+    "text_more": "Mucho mas",
+    "form_email": {
+      "label": "Email o teléfono",
+      "error": "Ingrese un correo electrónico o número de teléfono"
+    },
+    "remember": "¿Olvidaste tu e-mail?",
+    "new": "Crea una cuenta",
+    "next": "Próxima"
+  },
+  "text": {
+    "GodIsBig": "Dios es Maior",
+    "config": "Configurações",
+    "darkmode": "Modo oscuro",
+    "2L_search": "2L en el mar",
+    "2L_lucky": "2Lembre siempre en la fe, no en la suerte, firme y fuerte.",
+    "github": "Estudie el código fuente de este proyecto en el acceso a Github aquí.",
+    "keyboard_text": "portugués brasileño",
+    "loading": "Cargando"
+  },
+  "alt": {
+    "LogoGoogle": "Logo Google"
+  }
+}
