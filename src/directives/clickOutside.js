@@ -1,4 +1,4 @@
-export const clickOutside = {
+const vClickOutside = {
   beforeMount(el, binding) {
     el.clickOutsideEvent = function(event) {
       if (!(el === event.target || el.contains(event.target))) {
@@ -11,3 +11,5 @@ export const clickOutside = {
     document.body.removeEventListener('click', el.clickOutsideEvent);
   }
 }
+
+export default vClickOutside;
