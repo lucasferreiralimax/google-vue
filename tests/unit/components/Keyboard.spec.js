@@ -1,6 +1,7 @@
+import { describe, expect, it, beforeEach, afterEach } from 'vitest'
 import { shallowMount } from '@vue/test-utils'
 
-import Keyboard from '@/components/Keyboard/Keyboard.vue'
+import Keyboard from '@/components/Keyboard/KeyboardApp.vue'
 import noKeysChar from '@/components/Keyboard/utils'
 import store from '@/store'
 

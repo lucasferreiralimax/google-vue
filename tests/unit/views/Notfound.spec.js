@@ -1,6 +1,7 @@
+import { describe, expect, it } from 'vitest'
 import { shallowMount } from '@vue/test-utils'
 
-import Notfound from '@/views/Notfound.vue'
+import Notfound from '@/views/NotFoundView.vue'
 import router from '@/router'
 
 const wrapper = shallowMount(Notfound, {

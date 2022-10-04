@@ -1,11 +1,12 @@
+import { describe, expect, it } from 'vitest'
 import { shallowMount } from '@vue/test-utils'
 
-import Home from '@/views/Home.vue'
-import Profile from '@/components/Profile'
-import HeaderApp from '@/components/HeaderApp'
-import SearchApp from '@/components/SearchApp'
-import Keyboard from '@/components/Keyboard/Keyboard'
-import Voice from '@/components/Voice'
+import Home from '@/views/HomeView.vue'
+import Profile from '@/components/ProfileApp.vue'
+import HeaderApp from '@/components/HeaderApp.vue'
+import SearchApp from '@/components/SearchApp.vue'
+import Keyboard from '@/components/Keyboard/KeyboardApp.vue'
+import Voice from '@/components/VoiceApp.vue'
 
 const wrapper = shallowMount(Home)
 

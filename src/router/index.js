@@ -3,23 +3,23 @@ import { createRouter, createWebHistory } from 'vue-router'
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: () => import(/* webpackChunkName: "home" */ '../views/Home.vue')
+    name: 'HomeView',
+    component: () => import(/* webpackChunkName: "home" */ '../views/HomeView.vue')
   },
   {
     path: '/config',
-    name: 'Config',
-    component: () => import(/* webpackChunkName: "config" */ '../views/Config.vue')
+    name: 'ConfigView',
+    component: () => import(/* webpackChunkName: "config" */ '../views/ConfigView.vue')
   },
   {
     path: '/login',
-    name: 'Login',
-    component: () => import(/* webpackChunkName: "login" */ '../views/Login.vue')
+    name: 'LoginView',
+    component: () => import(/* webpackChunkName: "login" */ '../views/LoginView.vue')
   },
   {
     path: '/:catchAll(.*)',
-    name: 'Notfound',
-    component: () => import(/* webpackChunkName: "notfound" */ '../views/Notfound.vue')
+    name: 'NotFoundView',
+    component: () => import(/* webpackChunkName: "notfound" */ '../views/NotFoundView.vue')
   }
 ]
 

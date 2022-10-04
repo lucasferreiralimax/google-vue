@@ -6,12 +6,6 @@
   </header>
 </template>
 
-<script>
-export default {
-  name: 'HeaderApp',
-}
-</script>
-
 <style lang="scss">
 .App-header {
   align-items: center;

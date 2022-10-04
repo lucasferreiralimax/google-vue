@@ -1,6 +1,7 @@
+import { describe, expect, it } from 'vitest'
 import { shallowMount } from '@vue/test-utils'
 
-import Login from '@/views/Login.vue'
+import Login from '@/views/LoginView.vue'
 
 const wrapper = shallowMount(Login)
 

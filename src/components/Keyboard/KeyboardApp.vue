@@ -80,7 +80,7 @@ import { useStore, mapState } from 'vuex'
 import { Draggable } from '@/directives/draggable'
 
 export default {
-  name: 'Keyboard',
+  name: 'KeyboardApp',
   computed: mapState({ keyboard: state => state.keyboard }),
   directives: { Draggable },
   setup() {

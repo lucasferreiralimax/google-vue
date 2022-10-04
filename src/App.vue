@@ -1,23 +1,15 @@
+<script setup>
+import MenuApp from './components/MenuApp.vue'
+import FooterApp from './components/FooterApp.vue'
+</script>
+
 <template>
-  <div class="App">
+  <section class="App">
     <MenuApp/>
     <router-view/>
     <FooterApp/>
-  </div>
+  </section>
 </template>
-
-<script>
-import MenuApp from '@/components/MenuApp'
-import FooterApp from '@/components/FooterApp'
-
-export default {
-  name: 'App',
-  components: {
-    MenuApp,
-    FooterApp
-  }
-}
-</script>
 
 <style lang="scss">
 :root {

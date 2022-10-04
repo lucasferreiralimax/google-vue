@@ -1,3 +1,15 @@
+<script setup>
+import { watch } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { SUPPORT_LOCALES as supportLocales, setI18nLanguage } from '../i18n';
+
+const { locale } = useI18n({ useScope: 'global' });
+
+watch(locale, (val) => {
+  setI18nLanguage(val);
+});
+</script>
+
 <template>
   <select class="App-language" v-model="locale">
     <option
@@ -7,24 +19,6 @@
     </option>
   </select>
 </template>
-
-<script>
-import { defineComponent, watch } from 'vue';
-import { useI18n } from 'vue-i18n';
-import { SUPPORT_LOCALES, setI18nLanguage } from '../i18n';
-export default defineComponent({
-  name: 'TranslateSelect',
-  setup() {
-    const { t, locale } = useI18n({ useScope: 'global' });
-    watch(locale, (val) => {
-      setI18nLanguage(val);
-    });
-    return {
-      t, locale, supportLocales: SUPPORT_LOCALES,
-    };
-  },
-});
-</script>
 
 <style lang="scss">
 .App-language {

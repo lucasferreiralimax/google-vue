@@ -1,7 +1,8 @@
+import { describe, expect, it, beforeAll } from 'vitest'
 import { shallowMount } from '@vue/test-utils'
 
 import FooterApp from '@/components/FooterApp.vue'
-import Darkmode from '@/components/Darkmode'
+import DarkMode from '@/components/DarkMode.vue'
 import router from '@/router'
 
 const wrapper = shallowMount(FooterApp, {
@@ -17,8 +18,8 @@ describe('FooterApp', () => {
   it('is FooterApp a vue instance', async () => {
     expect(wrapper.exists()).toBeTruthy()
   })
-  it('in FooterApp a component Darkmode', () => {
-    expect(wrapper.getComponent(Darkmode).exists()).toBeTruthy()
+  it('in FooterApp a component DarkMode', () => {
+    expect(wrapper.getComponent(DarkMode).exists()).toBeTruthy()
   })
   it('in FooterApp with text Brasil and svg', () => {
     expect(wrapper.find('.brasil svg').exists()).toBeTruthy()

@@ -1,3 +1,14 @@
+<script setup>
+import { ref, onUnmounted } from 'vue'
+
+const url = ref(window.location.pathname)
+document.body.classList.add('notfound')
+
+onUnmounted(() => {
+  document.body.classList.remove('notfound')
+})
+</script>
+
 <template>
   <section class="App-notfound">
     <router-link to="/">
@@ -8,24 +19,6 @@
     <p>O URL <b class="highlight">{{ url }}</b> solicitado não foi encontrado. Isso é tudo que sabemos.</p>
   </section>
 </template>
-
-<script>
-import { ref, onUnmounted } from 'vue'
-
-export default {
-  name: 'NotfoundApp',
-  setup() {
-    const url = ref(window.location.pathname)
-    document.body.classList.add('notfound')
-
-    onUnmounted(() => {
-      document.body.classList.remove('notfound')
-    })
-
-    return { url }
-  }
-}
-</script>
 
 <style lang="scss">
 body.notfound {
