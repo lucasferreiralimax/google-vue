@@ -1,3 +1,11 @@
+<script setup>
+import { ref } from 'vue'
+import { useI18n } from 'vue-i18n';
+
+const nav = ref(false)
+const { t } = useI18n({ useScope: 'global' });
+</script>
+
 <template>
   <nav class='App-nav' :class="{'active': nav }">
     <button type="button" class="App-nav-menu" @click="nav = !nav" :aria-label="t('menu.arial_label.menu_button')">
@@ -31,20 +39,6 @@
     <div class='overlay' :class="{'active': nav }" @click="nav = false"></div>
   </nav>
 </template>
-
-<script>
-import { ref } from 'vue'
-import { useI18n } from 'vue-i18n';
-
-export default {
-  name: 'FooterApp',
-  setup() {
-    const nav = ref(false)
-    const { t } = useI18n({ useScope: 'global' });
-    return { nav, t }
-  }
-}
-</script>
 
 <style lang="scss">
 .App-nav {

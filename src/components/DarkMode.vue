@@ -1,3 +1,55 @@
+<script setup>
+  import { computed } from 'vue'
+  import { useStore } from 'vuex'
+  import { useI18n } from 'vue-i18n';
+
+  defineProps({
+    type: String,
+  });
+
+  const store = useStore()
+  const { t } = useI18n({ useScope: 'global' });
+  const darkmode = computed(() => store.state.darkmode)
+
+  dark(JSON.parse(localStorage.getItem("darkmode")))
+
+  function toggleMode () {
+    store.commit("updateDarkmode", !darkmode.value)
+    dark(darkmode.value)
+  }
+
+  function dark(type) {
+    let rootStyle = document.documentElement.style
+    localStorage.setItem("darkmode", type)
+    store.commit('updateDarkmode', type)
+    if(!type) {
+      rootStyle.setProperty('--main-color', '#000');
+      rootStyle.setProperty('--main-color-rgb', '0,0,0');
+      rootStyle.setProperty('--main-color-primary', '#1a73e8');
+      rootStyle.setProperty('--main-color-secondary', 'green');
+      rootStyle.setProperty('--main-bg-color-primary', '#fff');
+      rootStyle.setProperty('--main-bg-color-secondary', '#f2f2f2');
+      rootStyle.setProperty('--main-invert', '0');
+      rootStyle.setProperty('--logo-filter', 'none');
+      rootStyle.setProperty('--input-bg-color', '#fff');
+      rootStyle.setProperty('--input-bg-color-hover', '#fff');
+      rootStyle.setProperty('--input-drop-shadow', '#20212447');
+    } else {
+      rootStyle.setProperty('--main-color', '#fff');
+      rootStyle.setProperty('--main-color-rgb', '255,255,255');
+      rootStyle.setProperty('--main-color-primary', '#1a73e8');
+      rootStyle.setProperty('--main-color-secondary', 'green');
+      rootStyle.setProperty('--main-bg-color-primary', '#202124');
+      rootStyle.setProperty('--main-bg-color-secondary', '#171717');
+      rootStyle.setProperty('--main-invert', '1');
+      rootStyle.setProperty('--logo-filter', 'grayscale(1) brightness(3)');
+      rootStyle.setProperty('--input-bg-color', '#202124');
+      rootStyle.setProperty('--input-bg-color-hover', '#303134');
+      rootStyle.setProperty('--input-drop-shadow', '#171717');
+    }
+  }
+  </script>
+
 <template>
   <button type="button" class='darkmode' :class="{'footer': type, 'active': darkmode}" aria-label="Toggle darkmode" @click="toggleMode()">
     <svg v-if="type" width="25px" height="25px" viewBox="-5 -5 34 34" fill="var(--main-color)">
@@ -11,65 +63,6 @@
   </button>
 </template>
 
-<script>
-import { computed  } from 'vue'
-import { useStore } from 'vuex'
-import { useI18n } from 'vue-i18n';
-
-export default {
-  name: 'DarkMode',
-  props: ['type'],
-  setup() {
-    const store = useStore()
-    const { t } = useI18n({ useScope: 'global' });
-    const darkmode = computed(() => store.state.darkmode)
-
-    dark(JSON.parse(localStorage.getItem("darkmode")))
-
-    function toggleMode () {
-      store.commit("updateDarkmode", !darkmode.value)
-      dark(darkmode.value)
-    }
-
-    function dark(type) {
-      let rootStyle = document.documentElement.style
-      localStorage.setItem("darkmode", type)
-      store.commit('updateDarkmode', type)
-      if(!type) {
-        rootStyle.setProperty('--main-color', '#000');
-        rootStyle.setProperty('--main-color-rgb', '0,0,0');
-        rootStyle.setProperty('--main-color-primary', '#1a73e8');
-        rootStyle.setProperty('--main-color-secondary', 'green');
-        rootStyle.setProperty('--main-bg-color-primary', '#fff');
-        rootStyle.setProperty('--main-bg-color-secondary', '#f2f2f2');
-        rootStyle.setProperty('--main-invert', '0');
-        rootStyle.setProperty('--logo-filter', 'none');
-        rootStyle.setProperty('--input-bg-color', '#fff');
-        rootStyle.setProperty('--input-bg-color-hover', '#fff');
-        rootStyle.setProperty('--input-drop-shadow', '#20212447');
-      } else {
-        rootStyle.setProperty('--main-color', '#fff');
-        rootStyle.setProperty('--main-color-rgb', '255,255,255');
-        rootStyle.setProperty('--main-color-primary', '#1a73e8');
-        rootStyle.setProperty('--main-color-secondary', 'green');
-        rootStyle.setProperty('--main-bg-color-primary', '#202124');
-        rootStyle.setProperty('--main-bg-color-secondary', '#171717');
-        rootStyle.setProperty('--main-invert', '1');
-        rootStyle.setProperty('--logo-filter', 'grayscale(1) brightness(3)');
-        rootStyle.setProperty('--input-bg-color', '#202124');
-        rootStyle.setProperty('--input-bg-color-hover', '#303134');
-        rootStyle.setProperty('--input-drop-shadow', '#171717');
-      }
-    }
-    return {
-      toggleMode,
-      darkmode,
-      dark,
-      t
-    }
-  }
-}
-</script>
 <style scoped lang="scss">
 .darkmode {
   -webkit-tap-highlight-color: transparent;

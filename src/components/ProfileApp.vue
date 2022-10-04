@@ -1,3 +1,11 @@
+<script setup>
+import { ref } from 'vue'
+import vClickOutside from '@/directives/clickOutside.js'
+
+const profile = ref(false)
+function closeEvent() { profile.value = false }
+</script>
+
 <template>
   <section class="App-profile" v-click-outside="closeEvent">
     <h1 @click="profile = !profile">
@@ -19,21 +27,6 @@
     </div>
   </section>
 </template>
-
-<script>
-import { ref } from 'vue'
-import { clickOutside } from '@/directives/clickOutside.js'
-
-export default {
-  name: 'ProfileApp',
-  directives: {'click-outside': clickOutside},
-  setup() {
-    const profile = ref(false)
-    function closeEvent() { profile.value = false }
-    return { profile, closeEvent }
-  }
-}
-</script>
 
 <style scoped lang="scss">
 .App-profile {

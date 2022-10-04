@@ -1,19 +1,12 @@
-<script>
-  import { ref, onUnmounted } from 'vue'
+<script setup>
+import { ref, onUnmounted } from 'vue'
 
-  export default {
-    name: 'NotFoundApp',
-    setup() {
-      const url = ref(window.location.pathname)
-      document.body.classList.add('notfound')
+const url = ref(window.location.pathname)
+document.body.classList.add('notfound')
 
-      onUnmounted(() => {
-        document.body.classList.remove('notfound')
-      })
-
-      return { url }
-    }
-  }
+onUnmounted(() => {
+  document.body.classList.remove('notfound')
+})
 </script>
 
 <template>

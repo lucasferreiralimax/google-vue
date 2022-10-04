@@ -1,3 +1,28 @@
+<script setup>
+import { computed  } from 'vue'
+import { useStore } from 'vuex'
+
+const store = useStore()
+const search = computed(() => store.state.search)
+const keyboard = computed(() => store.state.keyboard)
+
+function searchGoogle() {
+  if(search.value) window.location = `https://www.google.com.br/search?&q=${search.value}`;
+}
+function searchUpdate(e) {
+  store.commit("updateSearch", e.target.value)
+}
+function searchClean() {
+  store.commit("updateSearch", "")
+}
+function toggleKeyboard () {
+  store.commit("updateKeyboard", !keyboard.value)
+}
+function activeVoice () {
+  store.commit("updateVoice", true)
+}
+</script>
+
 <template>
   <section class="App-search">
     <label class="label-search">
@@ -25,46 +50,6 @@
     </button>
   </section>
 </template>
-
-<script>
-import { computed  } from 'vue'
-import { useStore } from 'vuex'
-
-export default {
-  name: 'SearchApp',
-  setup() {
-    const store = useStore()
-    const search = computed(() => store.state.search)
-    const keyboard = computed(() => store.state.keyboard)
-
-    function searchGoogle() {
-      if(search.value) window.location = `https://www.google.com.br/search?&q=${search.value}`;
-    }
-    function searchUpdate(e) {
-      store.commit("updateSearch", e.target.value)
-    }
-    function searchClean() {
-      store.commit("updateSearch", "")
-    }
-    function toggleKeyboard () {
-      store.commit("updateKeyboard", !keyboard.value)
-    }
-    function activeVoice () {
-      store.commit("updateVoice", true)
-    }
-
-    return {
-      search,
-      keyboard,
-      searchGoogle,
-      searchUpdate,
-      searchClean,
-      toggleKeyboard,
-      activeVoice
-    }
-  }
-}
-</script>
 
 <style lang="scss" scoped>
 

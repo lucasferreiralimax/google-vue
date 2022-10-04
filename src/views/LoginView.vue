@@ -1,21 +1,14 @@
-<script>
-  import { ref, watch } from 'vue'
-  import { useI18n } from 'vue-i18n';
+<script setup>
+import { ref, watch } from 'vue'
+import { useI18n } from 'vue-i18n';
 
-  export default {
-    name: 'LoginApp',
-    setup() {
-      const { t } = useI18n({ useScope: 'global' });
-      const user = ref('lucasferreiralimax@gmail.com')
-      const error = ref(false)
+const { t } = useI18n({ useScope: 'global' });
+const user = ref('lucasferreiralimax@gmail.com')
+const error = ref(false)
 
-      watch(user, (newVal) => { error.value = newVal ? false : true })
+watch(user, (newVal) => { error.value = newVal ? false : true })
 
-      function submitLogin() { error.value = !user.value }
-
-      return { t, user, error, submitLogin }
-    }
-  }
+function submitLogin() { error.value = !user.value }
 </script>
 
 <template>
