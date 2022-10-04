@@ -10,6 +10,7 @@
     <p>{{ textCallback }}</p>
     <button
       class='btn-voice'
+      aria-label="Botão ativar reconhecimento de voz"
       :class="{'active': animationButton}"
       @click="desactiveVoice"
       type="button"
