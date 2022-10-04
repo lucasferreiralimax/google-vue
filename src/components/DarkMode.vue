@@ -17,7 +17,7 @@ import { useStore } from 'vuex'
 import { useI18n } from 'vue-i18n';
 
 export default {
-  name: 'Darkmode',
+  name: 'DarkMode',
   props: ['type'],
   setup() {
     const store = useStore()

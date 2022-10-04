@@ -1,6 +1,7 @@
+import { describe, expect, it } from 'vitest'
 import { shallowMount } from '@vue/test-utils'
 
-import Profile from '@/components/Profile.vue'
+import Profile from '@/components/ProfileApp.vue'
 
 const wrapper = shallowMount(Profile)
 

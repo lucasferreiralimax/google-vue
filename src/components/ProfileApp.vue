@@ -25,7 +25,7 @@ import { ref } from 'vue'
 import { clickOutside } from '@/directives/clickOutside.js'
 
 export default {
-  name: 'Profile',
+  name: 'ProfileApp',
   directives: {'click-outside': clickOutside},
   setup() {
     const profile = ref(false)

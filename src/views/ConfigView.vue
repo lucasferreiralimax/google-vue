@@ -1,8 +1,14 @@
+<script setup>
+import DarkMode from '../components/DarkMode.vue'
+import ProfileApp from '../components/ProfileApp.vue'
+import TranslateSelect from '../components/TranslateSelect.vue'
+</script>
+
 <template>
   <form class="App-config">
-    <Profile/>
+    <ProfileApp/>
     <h1>{{ $t('text.config') }}</h1>
-    <Darkmode />
+    <DarkMode/>
     <TranslateSelect/>
     <br/>
     <a
@@ -14,17 +20,6 @@
     </a>
   </form>
 </template>
-
-<script>
-import Darkmode from '@/components/Darkmode'
-import Profile from '@/components/Profile'
-import TranslateSelect from '@/components/TranslateSelect'
-
-export default {
-  name: 'ConfigApp',
-  components: { Darkmode, Profile, TranslateSelect }
-}
-</script>
 
 <style lang="scss" scoped>
 .App-config {

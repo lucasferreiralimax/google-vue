@@ -1,3 +1,7 @@
+<script setup>
+import DarkMode from './DarkMode.vue'
+</script>
+
 <template>
   <footer class="App-footer">
     <div>
@@ -12,7 +16,7 @@
         </svg>
         Brasil
       </h2>
-      <Darkmode type="footer" />
+      <DarkMode type="footer" />
     </div>
     <hr class="divider" />
     <div>
@@ -21,15 +25,6 @@
     </div>
   </footer>
 </template>
-
-<script>
-import Darkmode from '@/components/Darkmode'
-
-export default {
-  name: 'FooterApp',
-  components: { Darkmode }
-}
-</script>
 
 <style scoped lang="scss">
 .App-footer {

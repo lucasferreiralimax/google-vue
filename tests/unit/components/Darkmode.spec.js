@@ -1,10 +1,11 @@
+import { describe, expect, it } from 'vitest'
 import { shallowMount } from '@vue/test-utils'
 
-import Darkmode from '@/components/Darkmode.vue'
+import DarkMode from '@/components/DarkMode.vue'
 import store from '@/store'
 import router from '@/router'
 
-const wrapper = shallowMount(Darkmode, {
+const wrapper = shallowMount(DarkMode, {
   global: {
     plugins: [
       store,
@@ -13,8 +14,8 @@ const wrapper = shallowMount(Darkmode, {
   }
 })
 
-describe('Darkmode', () => {
-  it('is Darkmode a vue instance', async () => {
+describe('DarkMode', () => {
+  it('is DarkMode a vue instance', async () => {
     await router.isReady()
     expect(wrapper.exists()).toBeTruthy()
   })

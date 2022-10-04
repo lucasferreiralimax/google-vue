@@ -1,3 +1,23 @@
+<script>
+  import { ref, watch } from 'vue'
+  import { useI18n } from 'vue-i18n';
+
+  export default {
+    name: 'LoginApp',
+    setup() {
+      const { t } = useI18n({ useScope: 'global' });
+      const user = ref('lucasferreiralimax@gmail.com')
+      const error = ref(false)
+
+      watch(user, (newVal) => { error.value = newVal ? false : true })
+
+      function submitLogin() { error.value = !user.value }
+
+      return { t, user, error, submitLogin }
+    }
+  }
+</script>
+
 <template>
   <form class="App-login">
     <img src='../assets/logo.svg' class="App-logo" alt="logo Google" width="75" />
@@ -19,26 +39,6 @@
     <button type="button" class="App-login-next btn primary" @click="submitLogin">{{ t('login.next') }}</button>
   </form>
 </template>
-
-<script>
-import { ref, watch } from 'vue'
-import { useI18n } from 'vue-i18n';
-
-export default {
-  name: 'Login',
-  setup() {
-    const { t } = useI18n({ useScope: 'global' });
-    const user = ref('lucasferreiralimax@gmail.com')
-    const error = ref(false)
-
-    watch(user, (newVal) => { error.value = newVal ? false : true })
-
-    function submitLogin() { error.value = !user.value }
-
-    return { t, user, error, submitLogin }
-  }
-}
-</script>
 
 <style scoped lang="scss">
 @font-face {

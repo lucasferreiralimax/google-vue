@@ -1,6 +1,7 @@
+import { describe, expect, it } from 'vitest'
 import { shallowMount } from '@vue/test-utils'
 
-import Voice from '@/components/Voice.vue'
+import Voice from '@/components/VoiceApp.vue'
 
 import store from '@/store'
 
