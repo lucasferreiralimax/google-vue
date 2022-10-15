@@ -20,7 +20,14 @@
     "search_voice": "Búsqueda por voz",
     "search": "Pesquisa Google",
     "lucky": "Estoy con suerte",
-    "search_label": "Busca o ingresa una URL"
+    "search_label": "Busca o ingresa una URL",
+    "label": {
+      "clean": "Botón borrar campo de búsqueda",
+      "keyboard": "Botón habilitar @:search_component.keyboard",
+      "voice": "Botón habilitar reconhecimento de voz",
+      "search": "Botón @:search_component.search",
+      "lucky": "Botón @:search_component.lucky"
+    }
   },
   "voice": {
     "update": "Actualizar el SpeechRecognition",
