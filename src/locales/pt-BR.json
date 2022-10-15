@@ -66,5 +66,10 @@
     "text1": "Esse é um erro",
     "text2": "O URL",
     "text3": "solicitado não foi encontrado. Isso é tudo que sabemos."
+  },
+  "profile_component": {
+    "config": "Gerenciar sua Conta do Google",
+    "politics": "Política de Privacidade",
+    "terms": "Termos de Serviço"
   }
 }

@@ -18,11 +18,11 @@ function closeEvent() { profile.value = false }
       </a>
       <h1>Lucas Lima</h1>
       <h2>lucasferreiralimax@gmail.com</h2>
-      <button type="button">Gerenciar sua Conta do Google</button>
+      <button type="button">{{ $t('profile_component.config') }}</button>
       <div class="divider">
-        <a href="https://github.com/lucasferreiralimax" target="_blank" rel="noreferrer noopener">Política de Privacidade</a>
+        <a href="https://github.com/lucasferreiralimax" target="_blank" rel="noreferrer noopener">{{ $t('profile_component.politics') }}</a>
         <div class="bullet">•</div>
-        <a href="https://github.com/lucasferreiralimax" target="_blank" rel="noreferrer noopener">Termos de Serviço</a>
+        <a href="https://github.com/lucasferreiralimax" target="_blank" rel="noreferrer noopener">{{ $t('profile_component.terms') }}</a>
       </div>
     </div>
   </section>
