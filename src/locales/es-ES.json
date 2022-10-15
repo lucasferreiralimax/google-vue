@@ -61,5 +61,10 @@
   },
   "alt": {
     "LogoGoogle": "Logo Google"
+  },
+  "notfound": {
+    "text1": "Esto es un error",
+    "text2": "La URL",
+    "text3": "solicitado no fue encontrado. Eso es todo lo que sabemos."
   }
 }

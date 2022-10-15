@@ -14,9 +14,9 @@ onUnmounted(() => {
     <router-link to="/">
       <span id="logo" aria-label="Google"></span>
     </router-link>
-    <p><b>404.</b> Esse é um erro.</p>
+    <p><b>404.</b> {{ $t('notfound.text1') }}</p>
     <br/>
-    <p>O URL <b class="highlight">{{ url }}</b> solicitado não foi encontrado. Isso é tudo que sabemos.</p>
+    <p>{{ $t('notfound.text2') }} <b class="highlight">{{ url }}</b> {{ $t('notfound.text3') }}</p>
   </section>
 </template>
 
