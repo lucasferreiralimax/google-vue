@@ -1,6 +1,6 @@
 <template>
   <section class="App-keyboard" :class="{'active': keyboard}" v-draggable="draggableValue">
-    <h1 ref="handler">português brasileiro</h1>
+    <h1 ref="handler">{{ $t('text.keyboard') }}</h1>
     <button class="exit" type="button" @click="handleKeyboard(false)"><i class="icon icon-exit">X</i></button>
     <div class="App-keyboard-content" @click="onKeyVirtualEvents">
       <div class="row">
