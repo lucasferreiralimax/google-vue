@@ -156,13 +156,13 @@ export const Draggable = {
 		}
 
 		function getInitialMousePosition(event) {
-			if (event instanceof MouseEvent) {
+			if (window.MouseEvent && event instanceof MouseEvent) {
 				return {
 					left: event.clientX,
 					top: event.clientY
 				}
 			}
-			if (event instanceof TouchEvent) {
+			if (window.TouchEvent && event instanceof TouchEvent) {
 				const touch = event.changedTouches[event.changedTouches.length - 1];
 				return {
 					left: touch.clientX,
