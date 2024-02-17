@@ -88,7 +88,7 @@ function submitLogin() { error.value = !user.value }
     margin: 0 auto;
   }
   a {
-    color: var(--main-color-primary);
+    color: rgb(var(--main-color-primary));
     font-weight: 500;
     letter-spacing: .25px;
     text-decoration: none;
@@ -161,7 +161,7 @@ function submitLogin() { error.value = !user.value }
   transition: .3s all;
   width: 100%;
   &:focus {
-    border-color: var(--main-color-primary);
+    border-color: rgb(var(--main-color-primary));
     box-shadow: 0 0 0 1px var(--main-color-primary);
     outline: none;
     & + .App-login-label {

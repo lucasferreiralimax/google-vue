@@ -8,21 +8,26 @@ function closeEvent() { profile.value = false }
 
 <template>
   <section class="App-profile" v-click-outside="closeEvent">
-    <h1 @click="profile = !profile">
-      2L
+    <p @click="profile = !profile">
+      <span>@lucasferreiralimax</span>
       <img src="../assets/sinatra-40x40.jpg" class="App-profile-foto" alt="Foto Frank Sinatra" width="40" height="40" />
-    </h1>
+    </p>
     <div class='App-profile__content' :class="{'show': profile}">
+      <p class="email">lucasferreiralimax@gmail.com</p>
+      <button class="btn-close" aria-label="Close menu" @click="profile = false">
+        <svg width="22" height="22" viewBox="1 1 22 22" focusable="false" fill="var(--main-color)">
+          <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z" />
+        </svg>
+      </button>
       <a href="https://github.com/lucasferreiralimax" target="_blank" rel="noreferrer noopener">
         <img src="../assets/sinatra-150x150.jpg" class="App-profile-foto big" alt="Foto Frank Sinatra" width="150" height="150" />
       </a>
-      <h1>Lucas Lima</h1>
-      <h2>lucasferreiralimax@gmail.com</h2>
-      <button type="button">{{ $t('profile_component.config') }}</button>
+      <p class="title">Lucas Lima</p>
+      <button class="btn" type="button">{{ $t('profile_component.config') }}</button>
       <div class="divider">
-        <a href="https://github.com/lucasferreiralimax" target="_blank" rel="noreferrer noopener">{{ $t('profile_component.politics') }}</a>
+        <a class="link" href="https://github.com/lucasferreiralimax" target="_blank" rel="noreferrer noopener">{{ $t('profile_component.politics') }}</a>
         <div class="bullet">•</div>
-        <a href="https://github.com/lucasferreiralimax" target="_blank" rel="noreferrer noopener">{{ $t('profile_component.terms') }}</a>
+        <a class="link" href="https://github.com/lucasferreiralimax" target="_blank" rel="noreferrer noopener">{{ $t('profile_component.terms') }}</a>
       </div>
     </div>
   </section>
@@ -39,35 +44,25 @@ function closeEvent() { profile.value = false }
   text-align: center;
   top: 1em;
   z-index: 9;
-  & > h1 {
+  & > p {
     -webkit-tap-highlight-color: transparent;
-    align-items: center;
-    color: rgba(var(--main-color-rgb), .7);
-    cursor: pointer;
-    display: flex;
-    font-family: 'Ultra', serif;
-    font-size: 2.5em;
-    font-weight: normal;
-    justify-content: center;
-    margin: 0;
     outline: none;
+    font-size: 0;
     user-select: none;
   }
-  h1:hover,
-  h1:focus,
-  h1:active {
-    img {
-      box-shadow: 0 0 0 1px #fff, 0 0 10px 4px #aaa;
+  &:hover, &:focus, &:active {
+    & > p img {
+      box-shadow: 0 0 0 1px #fff, 0 0 0px 4px #eee;
       transform: scale(1.1);
     }
   }
 }
 
 .App-profile__content {
-  background: var(--main-bg-color-primary);
-  border: 1px solid rgba(var(--main-color-rgb), .2);
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0,0,0,.2);
+  background: var(--main-bg-color-profile);
+  border-radius: 28px;
+  border: 1px solid rgba(var(--main-color-rgb),0.15);
+  box-shadow: 0 4px 8px 3px rgba(0,0,0,.15), 0 1px 3px rgba(0,0,0,.3);;
   box-sizing: border-box;
   color: var(--main-color);
   max-height: calc(100vh - 62px - 100px);
@@ -77,7 +72,7 @@ function closeEvent() { profile.value = false }
   pointer-events: none;
   position: absolute;
   right: 8px;
-  top: 62px;
+  top: 42px;
   transition: .3s all;
   user-select: none;
   width: 354px;
@@ -85,18 +80,19 @@ function closeEvent() { profile.value = false }
     opacity: 1;
     pointer-events: all;
   }
-  h1, h2 {
+  p {
+    font-size: .9em;
     margin: 0;
     font-family: Arial;
   }
-  h1 { font-size: 1.2em; }
-  h2 { font-size: .9em; }
-  button {
+  .email { margin-top: 1.5rem; }
+  .title { font-size: 1.375rem; }
+  .btn {
     -webkit-tap-highlight-color: transparent;
-    background-color: rgba(var(--main-color-rgb), .1);
+    background-color: transparent;
     border-radius: 100px;
-    border: 1px solid rgba(var(--main-color-rgb), .2);
-    color: var(--main-color);
+    border: 1px solid var(--main-border-color);
+    color: rgb(var(--main-color-primary));
     cursor: pointer;
     display: inline-block;
     font: 500 14px/16px Google Sans,Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
@@ -109,17 +105,47 @@ function closeEvent() { profile.value = false }
     text-align: center;
     text-decoration: none;
     text-overflow: ellipsis;
+    &:hover,
     &:active {
-      background-color: rgba(var(--main-color-rgb), .2);
-      border-color: transparent;
+      background-color: rgba(var(--main-color-primary), .1);
       box-shadow: 0 1px 2px 0 rgba(60,64,67,0.3), 0 2px 6px 2px rgba(60,64,67,0.15);
     }
   }
-  a {
+  .btn-close {
+    position: absolute;
+    background: none;
+    border-radius: 50%;
+    border: 1px solid transparent;
+    color: #444746;
+    cursor: pointer;
+    height: 40px;
+    width: 40px;
+    outline: 0;
+    padding: 8px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    z-index: 2;
+    &:hover {
+      background: rgba(68,71,70,.08);
+    }
+  }
+  a.link {
     color: var(--main-color);
     display: inline-block;
     font-size: 12px;
     text-decoration: none;
+    max-width: 350px;
+    padding: 5px 4px;
+    letter-spacing: .1px;
+    font-size: .75rem;
+    line-height: 1rem;
+    position: relative;
+    vertical-align: text-top;
+    border-radius: 4px;
+    &:hover {
+      background: rgba(var(--main-color-rgb), .1);
+    }
   }
   .divider {
     align-items: center;
@@ -136,16 +162,15 @@ function closeEvent() { profile.value = false }
 
 .App-profile-foto {
   border-radius: 100px;
-  box-shadow: 0 0 0 2px #fff, 0 0 0 4px rgba(var(--main-color-rgb), .2);
   cursor: pointer;
-  height: 40px;
+  height: 32px;
+  width: 32px;
   margin-left: .2em;
   transition: .3s all;
-  width: 40px;
   &.big {
-    height: 150px;
+    height: 80px;
+    width: 80px;
     margin: 20px 0 15px;
-    width: 150px;
   }
 }
 </style>

@@ -13,12 +13,14 @@ import FooterApp from './components/FooterApp.vue'
 
 <style lang="scss">
 :root {
-  --main-color: #000;
+  --main-color: #303030;
   --main-color-rgb: 0,0,0;
-  --main-color-primary: #1a73e8;
+  --main-color-primary: 26, 115, 232;
   --main-color-secondary: green;
   --main-bg-color-primary: #fff;
   --main-bg-color-secondary: #f2f2f2;
+  --main-bg-color-profile: #e9eef6;
+  --main-border-color: #747775;
   --main-invert: 0;
   --logo-filter: none;
   --input-bg-color: #fff;
@@ -80,7 +82,7 @@ code { font-family: monospace; }
 a {
   color: var(--main-color);
   text-decoration: none;
-  &:hover { color: var(--main-color-primary); }
+  &:hover { color: rgb(var(--main-color-primary)); }
 }
 
 .btn {

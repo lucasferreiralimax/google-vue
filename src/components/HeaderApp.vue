@@ -48,7 +48,7 @@
     top: 5px;
     transform: translateX(100px);
     user-select: none;
-    &:hover { color: var(--main-color-primary); }
+    &:hover { color: rgb(var(--main-color-primary)); }
   }
 }
 

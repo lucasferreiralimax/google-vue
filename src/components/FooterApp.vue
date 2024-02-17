@@ -69,7 +69,7 @@ import DarkMode from './DarkMode.vue'
     font-size: .9em;
     text-decoration: none;
     transition: .3s all;
-    &:hover { color: var(--main-color-primary); }
+    &:hover { color: rgb(var(--main-color-primary)); }
   }
 }
 
