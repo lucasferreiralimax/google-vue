@@ -23,7 +23,7 @@
     "cypress": "^13.13.0",
     "eslint": "^9.6.0",
     "eslint-plugin-cypress": "^3.3.0",
-    "eslint-plugin-vue": "^9.26.0",
+    "eslint-plugin-vue": "^9.27.0",
     "jsdom": "^24.1.0",
     "sass": "^1.77.6",
     "start-server-and-test": "^2.0.4",
