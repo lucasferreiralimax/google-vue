@@ -12,8 +12,8 @@
   },
   "dependencies": {
     "register-service-worker": "^1.7.2",
-    "vue": "^3.5.7",
-    "vue-i18n": "^10.0.1",
+    "vue": "^3.5.8",
+    "vue-i18n": "^10.0.3",
     "vue-router": "^4.4.5",
     "vuex": "^4.1.0"
   },
@@ -21,10 +21,10 @@
     "@vitejs/plugin-vue": "^5.1.4",
     "@vue/test-utils": "^2.4.6",
     "cypress": "^13.14.2",
-    "eslint": "^9.11.0",
+    "eslint": "^9.11.1",
     "eslint-plugin-cypress": "^3.5.0",
     "eslint-plugin-vue": "^9.28.0",
-    "jsdom": "^25.0.0",
+    "jsdom": "^25.0.1",
     "sass": "^1.79.3",
     "start-server-and-test": "^2.0.8",
     "vite": "^5.4.7",
